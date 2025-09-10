@@ -4,6 +4,8 @@ public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D rb;
     private float inputHorizontal;
+    private float inputVertical;
+    public float jumpPower;
     public float movementSpeed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -17,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         movePlayerLateral();
-        //jump();
+        jump();
     }
 
     private void movePlayerLateral()
@@ -25,14 +27,17 @@ public class PlayerMovement : MonoBehaviour
         // used to move the player from left to right based on left to right
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(movementSpeed*inputHorizontal, rb.linearVelocity.y);
-    }    
+    }
 
-    //private void jump()
-    //{
+    private void jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpPower);
 
+        }
 
-
-    //}
+    }
 
 
 }
