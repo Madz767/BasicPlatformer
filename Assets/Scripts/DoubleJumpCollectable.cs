@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class PinkCollectable : MonoBehaviour
+public class DoubleJumpCollectable : MonoBehaviour
 {
-    string test;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -12,11 +11,6 @@ public class PinkCollectable : MonoBehaviour
         }
     }
 
-    public string getTestString()
-    {
-        test = "Hello from pink collectable";
-        return test;
-    }
 
 
 }

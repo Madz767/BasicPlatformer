@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //Debug.Log("Hello from PlayerMovement");
         rb = GetComponent<Rigidbody2D>();
-        numJumps = maxNumJumps;
+        numJumps = 1;
     }
 
     // Update is called once per frame
@@ -34,10 +34,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && numJumps == 1)
+        if (Input.GetKeyDown(KeyCode.Space) && numJumps <= maxNumJumps)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpPower);
-            numJumps = 0;
+            numJumps++;
         }
 
     }
@@ -65,17 +65,16 @@ public class PlayerMovement : MonoBehaviour
         //==============================================
         if (col.gameObject.CompareTag("Ground"))
         {
-            numJumps = maxNumJumps;
+            numJumps = 1;
         }
         
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Collectable"))
+        if(collision.gameObject.CompareTag("DoubleJump"))
         {
-            string fromPink = collision.gameObject.GetComponent<PinkCollectable>().getTestString();
-            Debug.Log(fromPink);
+            maxNumJumps = 2;
         }
     }
 
