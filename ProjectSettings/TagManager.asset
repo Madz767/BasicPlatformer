@@ -9,6 +9,8 @@ TagManager:
   - DoubleJump
   - WallMoveLeftBound
   - WallMoveRightBound
+  - JetBoots
+  - PJetBoots
   layers:
   - Default
   - TransparentFX

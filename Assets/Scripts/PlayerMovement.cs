@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     private int numJumps;
     public float jumpPower;
     public float movementSpeed;
+    public GameObject jetBoots;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log("Hello from PlayerMovement");
         rb = GetComponent<Rigidbody2D>();
         numJumps = 1;
+        jetBoots = GameObject.FindGameObjectWithTag("PJetBoots");
+        jetBoots.SetActive(false);
     }
 
     // Update is called once per frame
@@ -38,6 +42,10 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpPower);
             numJumps++;
+        }
+        if(Input.GetKey(KeyCode.LeftShift) && numJumps >= maxNumJumps && jetBoots == true)
+        {
+            rb.gravityScale = 0.5F;
         }
 
     }
@@ -66,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
         if (col.gameObject.CompareTag("Ground"))
         {
             numJumps = 1;
+            rb.gravityScale = 2;
         }
         
     }
@@ -75,6 +84,10 @@ public class PlayerMovement : MonoBehaviour
         if(collision.gameObject.CompareTag("DoubleJump"))
         {
             maxNumJumps = 2;
+        }
+        if(collision.gameObject.CompareTag("JetBoots"))
+        {
+            jetBoots.SetActive(true);
         }
     }
 
